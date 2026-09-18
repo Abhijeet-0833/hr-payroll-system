@@ -6,7 +6,6 @@ import EmployeeDirectory from './components/EmployeeDirectory';
 import PayrollEngine from './components/PayrollEngine';
 import LeaveManagement from './components/LeaveManagement';
 import PayslipModal from './components/PayslipModal';
-import TechArchitectureModal from './components/TechArchitectureModal';
 import ToastContainer from './components/ToastContainer';
 import { INITIAL_EMPLOYEES, INITIAL_LEAVES, PAYROLL_HISTORY } from './data/initialData';
 
@@ -19,12 +18,11 @@ export default function App() {
   
   // Toasts state
   const [toasts, setToasts] = useState([
-    { id: 1, type: 'info', title: 'System Online', message: 'Spring Boot REST API & MySQL Cluster active (+35% speed)' }
+    { id: 1, type: 'info', title: 'HR System Active', message: 'Welcome to Enterprise HR & Payroll Portal' }
   ]);
 
   // Modals state
   const [selectedPayslipEmp, setSelectedPayslipEmp] = useState(null);
-  const [showTechModal, setShowTechModal] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -87,7 +85,7 @@ export default function App() {
 
   const handleRunPayroll = (newRun) => {
     setPayrollHistory([newRun, ...payrollHistory]);
-    addToast("Payroll Executed", `Processed ${newRun.processedCount} records in ${newRun.throughputMs}ms!`, "success");
+    addToast("Payroll Executed", `Processed ${newRun.processedCount} records successfully!`, "success");
   };
 
   const handleUpdateLeaveStatus = (leaveId, newStatus) => {
@@ -103,7 +101,6 @@ export default function App() {
       <Sidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        openTechModal={() => setShowTechModal(true)}
       />
 
       {/* Main Content Area */}
@@ -111,7 +108,6 @@ export default function App() {
         <Header
           theme={theme}
           toggleTheme={toggleTheme}
-          openTechModal={() => setShowTechModal(true)}
           onQuickOnboard={() => setActiveTab('employees')}
           onExportCSV={handleExportCSV}
         />
@@ -120,10 +116,7 @@ export default function App() {
           <Dashboard
             employees={employees}
             leaves={leaves}
-            payrollHistory={payrollHistory}
             setActiveTab={setActiveTab}
-            openTechModal={() => setShowTechModal(true)}
-            addToast={addToast}
           />
         )}
 
@@ -140,7 +133,6 @@ export default function App() {
             employees={employees}
             payrollHistory={payrollHistory}
             onRunPayroll={handleRunPayroll}
-            openTechModal={() => setShowTechModal(true)}
           />
         )}
 
@@ -160,12 +152,6 @@ export default function App() {
         <PayslipModal
           employee={selectedPayslipEmp}
           onClose={() => setSelectedPayslipEmp(null)}
-        />
-      )}
-
-      {showTechModal && (
-        <TechArchitectureModal
-          onClose={() => setShowTechModal(false)}
         />
       )}
     </div>

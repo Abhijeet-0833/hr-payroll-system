@@ -9,12 +9,10 @@ import {
 } from 'lucide-react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import MicroservicesTopology from './MicroservicesTopology';
-import KafkaStreamer from './KafkaStreamer';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
 
-export default function Dashboard({ employees, leaves, _payrollHistory, setActiveTab, openTechModal }) {
+export default function Dashboard({ employees, leaves, setActiveTab }) {
   const [chartView, setChartView] = useState('net'); // 'net' or 'tax'
 
   const totalEmployees = employees.length;
@@ -65,22 +63,15 @@ export default function Dashboard({ employees, leaves, _payrollHistory, setActiv
       <div className="glass-card p-4 mb-4 position-relative overflow-hidden border-start border-4 border-primary">
         <div className="row align-items-center">
           <div className="col-lg-8">
-            <span className="badge badge-tech mb-2">Enterprise HR & Payroll Management System</span>
-            <h4 className="fw-bold text-white mb-2">High-Performance HR, Tax & Microservices Platform</h4>
+            <span className="badge badge-tech mb-2">Enterprise HR & Payroll Portal</span>
+            <h4 className="fw-bold text-white mb-2">Comprehensive Staff & Payroll Management</h4>
             <p className="text-muted mb-0" style={{ fontSize: '0.9rem' }}>
-              Built with <strong className="text-light">Java 17, Spring Boot, Hibernate ORM, PostgreSQL/MySQL</strong>, and <strong className="text-light">React.js</strong>. 
-              Integrated with <strong className="text-light">Apache Kafka</strong> event streaming and automated JUnit 5 test suites.
+              Manage employee directories, run automated monthly salary batch calculations, generate itemized payslips, and process leave requests.
             </p>
           </div>
           <div className="col-lg-4 text-lg-end mt-3 mt-lg-0">
             <button
-              className="btn btn-outline-light btn-sm me-2 rounded-pill px-3"
-              onClick={openTechModal}
-            >
-              View Architecture & Code
-            </button>
-            <button
-              className="btn btn-primary btn-sm rounded-pill px-3"
+              className="btn btn-primary btn-sm rounded-pill px-4 py-2"
               onClick={() => setActiveTab('payroll')}
             >
               Run Batch Payroll →
@@ -88,9 +79,6 @@ export default function Dashboard({ employees, leaves, _payrollHistory, setActiv
           </div>
         </div>
       </div>
-
-      {/* Microservices Topology Visualizer */}
-      <MicroservicesTopology />
 
       {/* KPI Stats Grid */}
       <div className="row g-3 mb-4">
@@ -102,7 +90,7 @@ export default function Dashboard({ employees, leaves, _payrollHistory, setActiv
             </div>
             <h3 className="fw-bold text-white mb-1">{totalEmployees}</h3>
             <small className="text-emerald d-flex align-items-center gap-1" style={{ fontSize: '0.75rem' }}>
-              <TrendingUp size={12} /> +12% quarterly growth
+              <TrendingUp size={12} /> Active Personnel
             </small>
           </div>
         </div>
@@ -115,7 +103,7 @@ export default function Dashboard({ employees, leaves, _payrollHistory, setActiv
             </div>
             <h3 className="fw-bold text-white mb-1">₹{(totalGrossPayroll / 100000).toFixed(2)} Lakhs</h3>
             <small className="text-emerald d-flex align-items-center gap-1" style={{ fontSize: '0.75rem' }}>
-              <CheckCircle size={12} /> Spring Boot Batch Engine
+              <CheckCircle size={12} /> Total Calculated Disbursement
             </small>
           </div>
         </div>
@@ -128,7 +116,7 @@ export default function Dashboard({ employees, leaves, _payrollHistory, setActiv
             </div>
             <h3 className="fw-bold text-white mb-1">₹{(totalTaxDeducted / 1000).toFixed(1)}k</h3>
             <small className="text-purple d-flex align-items-center gap-1" style={{ fontSize: '0.75rem' }}>
-              Covered MySQL Index (+35% speed)
+              Statutory Withholdings
             </small>
           </div>
         </div>
@@ -151,15 +139,14 @@ export default function Dashboard({ employees, leaves, _payrollHistory, setActiv
         </div>
       </div>
 
-      {/* Analytics Chart & Real-Time Kafka Streamer */}
+      {/* Analytics Chart */}
       <div className="row g-3 mb-4">
-        {/* Dynamic Department Chart */}
-        <div className="col-lg-7">
-          <div className="glass-card p-4 h-100">
+        <div className="col-12">
+          <div className="glass-card p-4">
             <div className="d-flex align-items-center justify-content-between mb-3">
               <div>
                 <h6 className="fw-bold text-white m-0">Departmental Financial Metrics</h6>
-                <small className="text-muted">Live distribution across enterprise software units</small>
+                <small className="text-muted">Live distribution across organizational departments</small>
               </div>
               <div className="btn-group btn-group-sm">
                 <button
@@ -176,13 +163,8 @@ export default function Dashboard({ employees, leaves, _payrollHistory, setActiv
                 </button>
               </div>
             </div>
-            <Bar data={barChartData} options={barOptions} height={130} />
+            <Bar data={barChartData} options={barOptions} height={80} />
           </div>
-        </div>
-
-        {/* Live Kafka Log Streamer */}
-        <div className="col-lg-5">
-          <KafkaStreamer />
         </div>
       </div>
     </div>
