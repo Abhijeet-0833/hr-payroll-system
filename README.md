@@ -65,7 +65,7 @@ A modern, high-performance **Enterprise HR & Payroll Management Web Application*
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/hr-payroll-system.git
+   git clone https://github.com/Abhijeet-0833/hr-payroll-system.git
    cd hr-payroll-system
    ```
 
