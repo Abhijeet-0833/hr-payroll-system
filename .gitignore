@@ -2,21 +2,37 @@
 node_modules/
 .pnpm-store/
 
-# Production & Build outputs
+# Production & build outputs
 dist/
 dist-ssr/
 build/
+coverage/
 
 # Cache directories
 .vite/
 .cache/
 
-# Environment variables
+# Environment variables and local secrets
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+
+# Local databases, backups and payroll exports
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+*.bak
+*.csv
+*.xlsx
+*.xls
+*.pdf
+payroll-exports/
+employee-exports/
 
 # Logs
 logs/
@@ -27,12 +43,12 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# OS & System Files
+# OS & system files
 .DS_Store
 Thumbs.db
 Desktop.ini
 
-# IDE & Editor files
+# IDE & editor files
 .vscode/
 !.vscode/extensions.json
 .idea/
@@ -43,4 +59,3 @@ Desktop.ini
 *.sw?
 *.sublime-project
 *.sublime-workspace
-
